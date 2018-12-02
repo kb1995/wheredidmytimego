@@ -81,6 +81,28 @@ class App extends Component {
     }
   }
 
+  handleAddviaButton = () => {
+    if (this.state.text) {
+      var time = new Date().toLocaleTimeString();
+      let newActivity = this.state.activityObj
+      newActivity.text = this.state.text
+      newActivity.time = time
+      newActivity.category = this.state.checked
+
+      this.setState({
+        activityArray: [...this.state.activityArray, newActivity],
+        text: '',
+        checked: false,
+        activityObj: {
+          text: '',
+          time: '',
+          percentage: null,
+          category: null,
+        }
+      })
+    }
+  }
+
   handleReport = () => {
     let updated_activityArray = this.state.activityArray;
     let startTime = moment(this.state.activityArray[0].time, 'HH:mm:ss')
@@ -91,7 +113,7 @@ class App extends Component {
     for (let i = 1; i < this.state.activityArray.length; i++) {
       let item = moment(this.state.activityArray[i].time, 'HH:mm:ss')
       let percentage = ((item - moment(this.state.activityArray[i - 1].time, 'HH:mm:ss')) / totalTime) * 100
-      updated_activityArray[i-1].percentage = percentage
+      updated_activityArray[i - 1].percentage = percentage
     }
 
     // add the end here
@@ -102,8 +124,8 @@ class App extends Component {
     newActivity.category = false
     newActivity.percentage = null;
     updated_activityArray.push(newActivity)
-    
-    updated_activityArray[updated_activityArray.length-2].percentage = ((moment(time, 'HH:mm:ss') - moment(updated_activityArray[updated_activityArray.length - 2].time, 'HH:mm:ss')) / totalTime) * 100
+
+    updated_activityArray[updated_activityArray.length - 2].percentage = ((moment(time, 'HH:mm:ss') - moment(updated_activityArray[updated_activityArray.length - 2].time, 'HH:mm:ss')) / totalTime) * 100
     this.setState({
       activityArray: updated_activityArray,
       reportGenerated: true,
@@ -140,7 +162,7 @@ class App extends Component {
   }
 
   handleDelete = (idx) => {
-    this.state.activityArray.splice(idx,1)
+    this.state.activityArray.splice(idx, 1)
     this.setState({
       activityArray: this.state.activityArray,
     })
@@ -213,6 +235,8 @@ class App extends Component {
           <button style={{ width: '150px' }} className={`btn ${this.state.checked ? 'btn-success' : 'btn-danger'}`} onClick={this.handleCategory}>{this.state.checked ? 'Productive' : 'Unproductive'}</button>
         </Flex>
 
+        <button onClick={this.handleAddviaButton} className="btn btn-outline-primary my-3">Add Activity</button>
+
         <table className="table">
           <thead className="thead-light">
             <tr>
@@ -228,7 +252,7 @@ class App extends Component {
         </table>
 
 
-        <button className='btn btn-primary' onClick={this.handleReport}>Generate a report</button>
+        <button className='btn btn-info' onClick={this.handleReport}>Generate a report</button>
       </div>
     );
   }
