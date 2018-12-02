@@ -5,8 +5,8 @@ import randomColor from 'randomcolor'
 import { ParentDiv, Popup, TextInput, Flex } from './App.styled'
 
 // random colors
-const lightColors = randomColor({ hue: 'orange', count: 20 });
-const darkColors = randomColor({ hue: 'purple', count: 20 });
+const lightColors = randomColor({ hue: 'orange',luminosity: 'bright', count: 20 });
+const darkColors = randomColor({ hue: 'blue', luminosity: 'dark', count: 20 });
 
 const initialState = {
   text: '',
