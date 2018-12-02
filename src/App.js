@@ -5,12 +5,12 @@ import randomColor from 'randomcolor'
 import { ParentDiv, Popup, TextInput, Flex } from './App.styled'
 
 // random colors
-const lightColors = randomColor({ hue: 'orange',luminosity: 'bright', count: 20 });
-const darkColors = randomColor({ hue: 'blue', luminosity: 'dark', count: 20 });
+const lightColors = randomColor({ hue: 'green',luminosity: 'light', count: 20 });
+const darkColors = randomColor({ hue: 'red', luminosity: 'dark', count: 20 });
 
 const initialState = {
   text: '',
-  checked: false,
+  checked: true,
   reportGenerated: false,
   activityArray: [],
   activityObj: {
@@ -69,7 +69,6 @@ class App extends Component {
         this.setState({
           activityArray: [...this.state.activityArray, newActivity],
           text: '',
-          checked: false,
           activityObj: {
             text: '',
             time: '',
@@ -92,7 +91,6 @@ class App extends Component {
       this.setState({
         activityArray: [...this.state.activityArray, newActivity],
         text: '',
-        checked: false,
         activityObj: {
           text: '',
           time: '',
@@ -232,7 +230,8 @@ class App extends Component {
 
         <Flex onKeyPress={this.handleAdd}>
           <TextInput className="mr-3" placeholder='New activity...' onChange={this.handleChangeInput} value={this.state.text} />
-          <button style={{ width: '150px' }} className={`btn ${this.state.checked ? 'btn-success' : 'btn-danger'}`} onClick={this.handleCategory}>{this.state.checked ? 'Productive' : 'Unproductive'}</button>
+          <button style={{ width: '150px' }} className={`mr-3 btn ${this.state.checked ? 'btn-success' : 'btn-outline-success'}`} onClick={this.handleCategory}>Productive</button>
+          <button style={{ width: '150px' }} className={`btn ${this.state.checked ? 'btn-outline-danger' : 'btn-danger'}`} onClick={this.handleCategory}>Unproductive</button>
         </Flex>
 
         <button onClick={this.handleAddviaButton} className="btn btn-outline-primary my-3">Add Activity</button>
