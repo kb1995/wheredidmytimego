@@ -146,6 +146,15 @@ class App extends Component {
     })
   }
 
+  handleGoBack = () => {
+    this.state.activityArray.pop()
+
+    this.setState({
+      activityArray: this.state.activityArray,
+      reportGenerated: false,
+    })
+  }
+
 
   render() {
     // output stuff
@@ -186,7 +195,10 @@ class App extends Component {
             <p><b>Duration:</b> {this.state.otherStatistics.duration} hours</p>
           </div>
 
-          <button className="btn btn-primary" onClick={this.handleReset}>Start again</button>
+          <div className="text-center justify-content-center">
+            <div onClick={this.handleGoBack} className="btn btn-outline-info mr-3">👈</div>
+            <button className="btn btn-primary" onClick={this.handleReset}>Start again</button>
+          </div>
         </div>
       )
     }
