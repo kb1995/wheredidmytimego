@@ -184,7 +184,7 @@ class App extends Component {
           <td>{item.text}</td>
           <td>{item.time}</td>
           <td>{item.category ? 'Yes' : 'No'}</td>
-          <td><button onClick={() => { this.handleDelete(idx) }} className="btn btn-danger">X</button></td>
+          <td><button onClick={() => { this.handleDelete(idx) }} className="btn btn-danger font-weight-bold">X</button></td>
         </tr>
       )
     })
